@@ -4,7 +4,7 @@
  */
 
 import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
+import {DefaultDocumentNodeResolver, structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './src/schemaTypes'
 import {structure} from './src/structure'
@@ -16,7 +16,7 @@ import {
   type DocumentLocation,
 } from 'sanity/presentation'
 import {assist} from '@sanity/assist'
-import {gtPlugin} from 'gt-sanity'
+import {gtPlugin, TranslationsTab} from 'gt-sanity'
 import config from './gt.config.json'
 
 // Environment variables for project configuration
@@ -43,6 +43,17 @@ function resolveHref(documentType?: string, slug?: string): string | undefined {
     default:
       console.warn('Invalid document type:', documentType)
       return undefined
+  }
+}
+
+export const defaultDocumentNode: DefaultDocumentNodeResolver = (S, {schemaType}) => {
+  // Add your translatable document types here
+  // Replace 'myTranslatableDocumentType' with your actual document type(s)
+  if (schemaType === 'settings' || schemaType === 'page' || schemaType === 'post') {
+    return S.document().views([
+      S.view.form(),
+      S.view.component(TranslationsTab).title('General Translation'),
+    ])
   }
 }
 
@@ -134,6 +145,7 @@ export default defineConfig({
     }),
     structureTool({
       structure, // Custom studio structure configuration, imported from ./src/structure.ts
+      defaultDocumentNode,
     }),
     // Additional plugins for enhanced functionality
     unsplashImageAsset(),
