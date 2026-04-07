@@ -4,7 +4,7 @@
  */
 
 import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
+import {DefaultDocumentNodeResolver, structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './src/schemaTypes'
 import {structure} from './src/structure'
@@ -16,6 +16,8 @@ import {
   type DocumentLocation,
 } from 'sanity/presentation'
 import {assist} from '@sanity/assist'
+import {gtPlugin, TranslationsTab} from 'gt-sanity'
+import config from './gt.config.json'
 
 // Environment variables for project configuration
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-projectID'
@@ -44,6 +46,17 @@ function resolveHref(documentType?: string, slug?: string): string | undefined {
   }
 }
 
+export const defaultDocumentNode: DefaultDocumentNodeResolver = (S, {schemaType}) => {
+  // Add your translatable document types here
+  // Replace 'myTranslatableDocumentType' with your actual document type(s)
+  if (schemaType === 'settings' || schemaType === 'page' || schemaType === 'post') {
+    return S.document().views([
+      S.view.form(),
+      S.view.component(TranslationsTab).title('General Translation'),
+    ])
+  }
+}
+
 // Main Sanity configuration
 export default defineConfig({
   name: 'default',
@@ -53,6 +66,17 @@ export default defineConfig({
   dataset,
 
   plugins: [
+    gtPlugin({
+      ...config,
+      translateDocuments: ['settings', 'post', 'page'],
+      ignoreFields: [
+        {fields: [{property: '$.slug', type: 'slug'}]},
+        {fields: [{property: '$.category'}]},
+        {fields: [{property: '$..linkType'}]},
+        {fields: [{property: '$..frequencies.default'}]},
+      ],
+      skipFields: [{fields: [{property: '$.slug', type: 'slug'}]}],
+    }),
     // Presentation tool configuration for Visual Editing
     presentationTool({
       previewUrl: {
@@ -121,6 +145,7 @@ export default defineConfig({
     }),
     structureTool({
       structure, // Custom studio structure configuration, imported from ./src/structure.ts
+      defaultDocumentNode,
     }),
     // Additional plugins for enhanced functionality
     unsplashImageAsset(),

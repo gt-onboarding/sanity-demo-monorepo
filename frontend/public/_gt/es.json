@@ -1,0 +1,32 @@
+{
+  "009a7eca764d06f5": "Publicaciones recientes",
+  "3afeb0e46b3ccb75": [
+    "Estas ",
+    {
+      "i": 1,
+      "k": "_gt_value_1",
+      "v": "v"
+    },
+    " publicaciones del blog se obtienen de tu Studio de Sanity."
+  ],
+  "4e31cda7f2097a0d": "Creado con Sanity + Next.js.",
+  "4f66cf7a582a352e": "Una plantilla de inicio para",
+  "5ce7bc7a5e3ce1d4": "Documento de Sanity",
+  "7be0c393d34092d8": "Acerca de",
+  "c3b483da3d1794db": "Ver en GitHub",
+  "c4efb8e5d431d94f": {
+    "c": "Ver en GitHub",
+    "i": 1,
+    "t": "span"
+  },
+  "ef2f761700466a92": "Leer la documentación de Next.js",
+  "fe06c8834bcca7dc": [
+    "Publicaciones recientes (",
+    {
+      "i": 1,
+      "k": "_gt_value_1",
+      "v": "v"
+    },
+    ")"
+  ]
+}

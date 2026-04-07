@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import {T, Var} from 'gt-next'
+import {getLocale} from 'gt-next/server'
 
 import {sanityFetch} from '@/sanity/lib/live'
 import {morePostsQuery, allPostsQuery} from '@/sanity/lib/queries'
@@ -45,8 +47,8 @@ const Posts = ({
   subHeading,
 }: {
   children: React.ReactNode
-  heading?: string
-  subHeading?: string
+  heading?: React.ReactNode
+  subHeading?: React.ReactNode
 }) => (
   <div>
     {heading && <h2 className="text-3xl text-gray-900 sm:text-4xl lg:text-5xl">{heading}</h2>}
@@ -56,9 +58,10 @@ const Posts = ({
 )
 
 export const MorePosts = async ({skip, limit}: {skip: string; limit: number}) => {
+  const locale = await getLocale()
   const {data} = await sanityFetch({
     query: morePostsQuery,
-    params: {skip, limit},
+    params: {skip, limit, locale},
   })
 
   if (!data || data.length === 0) {
@@ -66,7 +69,7 @@ export const MorePosts = async ({skip, limit}: {skip: string; limit: number}) =>
   }
 
   return (
-    <Posts heading={`Recent Posts (${data?.length})`}>
+    <Posts heading={<T>Recent Posts (<Var>{data?.length}</Var>)</T>}>
       {data?.map((post: AllPostsQueryResult[number]) => (
         <Post key={post._id} post={post} />
       ))}
@@ -75,7 +78,8 @@ export const MorePosts = async ({skip, limit}: {skip: string; limit: number}) =>
 }
 
 export const AllPosts = async () => {
-  const {data} = await sanityFetch({query: allPostsQuery})
+  const locale = await getLocale()
+  const {data} = await sanityFetch({query: allPostsQuery, params: {locale}})
 
   if (!data || data.length === 0) {
     return <OnBoarding />
@@ -83,8 +87,8 @@ export const AllPosts = async () => {
 
   return (
     <Posts
-      heading="Recent Posts"
-      subHeading={`${data.length === 1 ? 'This blog post is' : `These ${data.length} blog posts are`} populated from your Sanity Studio.`}
+      heading={<T>Recent Posts</T>}
+      subHeading={<T>These <Var>{data.length}</Var> blog posts are populated from your Sanity Studio.</T>}
     >
       {data.map((post: AllPostsQueryResult[number]) => (
         <Post key={post._id} post={post} />

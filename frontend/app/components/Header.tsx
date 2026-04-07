@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import {T} from 'gt-next'
+import {LocaleSelector} from 'gt-next'
 import {settingsQuery} from '@/sanity/lib/queries'
 import {sanityFetch} from '@/sanity/lib/live'
 
@@ -24,8 +26,12 @@ export default async function Header() {
             >
               <li>
                 <Link href="/about" className="hover:underline">
-                  About
+                  <T>About</T>
                 </Link>
+              </li>
+
+              <li>
+                <LocaleSelector />
               </li>
 
               <li className="sm:before:w-[1px] sm:before:bg-gray-200 before:block flex sm:gap-4 md:gap-6">
@@ -35,7 +41,7 @@ export default async function Header() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="whitespace-nowrap">View on GitHub</span>
+                  <T><span className="whitespace-nowrap">View on GitHub</span></T>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
