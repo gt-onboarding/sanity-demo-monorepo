@@ -1,0 +1,7 @@
+{
+  "$schema": "https://assets.gtx.dev/config-schema.json",
+  "defaultLocale": "en",
+  "locales": ["es", "zh", "ja"],
+  "_versionId": "710166a0b7607949862c754d72bc33e2006164c4db0312d4d234f00f7f3c9051",
+  "framework": "next-app"
+}

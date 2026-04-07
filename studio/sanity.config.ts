@@ -16,6 +16,8 @@ import {
   type DocumentLocation,
 } from 'sanity/presentation'
 import {assist} from '@sanity/assist'
+import {gtPlugin} from 'gt-sanity'
+import config from './gt.config.json'
 
 // Environment variables for project configuration
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-projectID'
@@ -53,6 +55,17 @@ export default defineConfig({
   dataset,
 
   plugins: [
+    gtPlugin({
+      ...config,
+      translateDocuments: ['settings', 'post', 'page'],
+      ignoreFields: [
+        {fields: [{property: '$.slug', type: 'slug'}]},
+        {fields: [{property: '$.category'}]},
+        {fields: [{property: '$..linkType'}]},
+        {fields: [{property: '$..frequencies.default'}]},
+      ],
+      skipFields: [{fields: [{property: '$.slug', type: 'slug'}]}],
+    }),
     // Presentation tool configuration for Visual Editing
     presentationTool({
       previewUrl: {
