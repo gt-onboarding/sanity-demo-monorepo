@@ -1,6 +1,7 @@
 import {Suspense} from 'react'
 import Link from 'next/link'
 import {PortableText} from '@portabletext/react'
+import {T} from 'gt-next'
 
 import {AllPosts} from '@/app/components/Posts'
 import GetStartedCode from '@/app/components/GetStartedCode'
@@ -23,7 +24,7 @@ export default async function Page() {
             <div className="relative min-h-[40vh] mx-auto max-w-2xl pt-10 xl:pt-20 pb-30 space-y-6 lg:max-w-4xl lg:px-12 flex flex-col items-center justify-center">
               <div className="flex flex-col gap-4 items-center">
                 <div className="text-md leading-6 prose uppercase py-1 px-3 bg-white font-mono italic">
-                  A starter template for
+                  <T>A starter template for</T>
                 </div>
                 <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-black">
                   <Link
@@ -67,7 +68,7 @@ export default async function Page() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Sanity Documentation
+                  <T>Sanity Documentation</T>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"

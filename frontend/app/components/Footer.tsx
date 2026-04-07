@@ -1,3 +1,5 @@
+import {T} from 'gt-next'
+
 export default function Footer() {
   return (
     <footer className="bg-gray-50 relative">
@@ -5,7 +7,7 @@ export default function Footer() {
       <div className="container relative">
         <div className="flex flex-col items-center py-28 lg:flex-row">
           <h3 className="mb-10 text-center text-4xl font-mono leading-tight tracking-tighter lg:mb-0 lg:w-1/2 lg:pr-4 lg:text-left lg:text-2xl">
-            Built with Sanity + Next.js.
+            <T>Built with Sanity + Next.js.</T>
           </h3>
           <div className="flex flex-col gap-3 items-center justify-center lg:w-1/2 lg:flex-row lg:pl-4">
             <a
@@ -14,10 +16,10 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              View on GitHub
+              <T>View on GitHub</T>
             </a>
             <a href="https://nextjs.org/docs" className="mx-3 hover:underline font-mono">
-              Read Next.js Documentation
+              <T>Read Next.js Documentation</T>
             </a>
           </div>
         </div>
