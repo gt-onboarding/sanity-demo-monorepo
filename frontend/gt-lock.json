@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "branchId": "",
+  "entries": [
+    {
+      "fileId": "879f3a5f954ee8b75bf1e91f4ea9916b41c933e5beba7eb6362647a637c9c66d",
+      "versionId": "26e280724a0c0489c1cc9557be22d7dcf11f57dfa8d0c5ecb13290533d3e3aab",
+      "translations": {
+        "es": {
+          "updatedAt": "2026-04-07T05:04:54.177Z",
+          "fileName": "/Users/brian/gt/onboarding/sanity-demo-monorepo/frontend/public/_gt/es.json",
+          "postProcessHash": "fdec2f2ac42d553d7dc85bcf2fa7b9e5999209acd43d619bac94be5ba6b203e7"
+        },
+        "ja": {
+          "updatedAt": "2026-04-07T05:04:54.178Z",
+          "fileName": "/Users/brian/gt/onboarding/sanity-demo-monorepo/frontend/public/_gt/ja.json",
+          "postProcessHash": "6d20788566858a11ca79e7f7241cbdc9dea31535431be17c0785199a16f73f7f"
+        },
+        "zh": {
+          "updatedAt": "2026-04-07T05:04:54.178Z",
+          "fileName": "/Users/brian/gt/onboarding/sanity-demo-monorepo/frontend/public/_gt/zh.json",
+          "postProcessHash": "0e63448536fe582e5445563e977ecfc9309d25ac2612fc2c17319f2f94ebb0e7"
+        }
+      },
+      "fileName": "__INTERNAL_GT_TEMPLATE_NAME__",
+      "staged": false
+    }
+  ]
+}

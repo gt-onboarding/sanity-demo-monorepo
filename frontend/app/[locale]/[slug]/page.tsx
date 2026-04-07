@@ -1,5 +1,6 @@
 import type {Metadata} from 'next'
 import Head from 'next/head'
+import {getLocale} from 'gt-next/server'
 
 import PageBuilderPage from '@/app/components/PageBuilder'
 import {sanityFetch} from '@/sanity/lib/live'
@@ -31,10 +32,10 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
+  const locale = await getLocale()
   const {data: page} = await sanityFetch({
     query: getPageQuery,
-    params,
-    // Metadata should never contain stega
+    params: {...params, locale},
     stega: false,
   })
 
@@ -46,7 +47,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function Page(props: Props) {
   const params = await props.params
-  const [{data: page}] = await Promise.all([sanityFetch({query: getPageQuery, params})])
+  const locale = await getLocale()
+  const [{data: page}] = await Promise.all([
+    sanityFetch({query: getPageQuery, params: {...params, locale}}),
+  ])
 
   if (!page?._id) {
     return (

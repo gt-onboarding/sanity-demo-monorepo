@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import {T, Var} from 'gt-next'
+import {getLocale} from 'gt-next/server'
 
 import {sanityFetch} from '@/sanity/lib/live'
 import {morePostsQuery, allPostsQuery} from '@/sanity/lib/queries'
@@ -57,9 +58,10 @@ const Posts = ({
 )
 
 export const MorePosts = async ({skip, limit}: {skip: string; limit: number}) => {
+  const locale = await getLocale()
   const {data} = await sanityFetch({
     query: morePostsQuery,
-    params: {skip, limit},
+    params: {skip, limit, locale},
   })
 
   if (!data || data.length === 0) {
@@ -76,7 +78,8 @@ export const MorePosts = async ({skip, limit}: {skip: string; limit: number}) =>
 }
 
 export const AllPosts = async () => {
-  const {data} = await sanityFetch({query: allPostsQuery})
+  const locale = await getLocale()
+  const {data} = await sanityFetch({query: allPostsQuery, params: {locale}})
 
   if (!data || data.length === 0) {
     return <OnBoarding />
